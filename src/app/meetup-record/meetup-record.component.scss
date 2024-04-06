@@ -1,0 +1,42 @@
+section {
+  display: flex;
+  justify-content: space-between;
+  border: 0.5px solid var(--accent-color-violet);
+  margin-block: 20px;
+  padding-left: 20px;
+  position: relative;
+  background-color: var(--accent-back-color);
+}
+
+section,
+section > *,
+p,
+h2,
+a {
+  background-color: var(--accent-back-color);
+}
+
+.main-info {
+  flex-grow: 1;
+  display: grid;
+}
+
+.date-time {
+  display: grid;
+}
+
+a {
+  //width: fit-content;
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+p {
+  margin-block: 5px;
+}
+
+h2 {
+  margin-block: 10px;
+}

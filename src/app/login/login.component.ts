@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {User} from "../interfaces/user";
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 
+
+// export interface LoginForm {
+//   email: FormControl<string>;
+//   password: FormControl<string>;
+//   fio: FormControl<string>;
+// }
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,9 +20,9 @@ import {RouterLink} from "@angular/router";
 
 export class LoginComponent {
     loginForm!: FormGroup<{
-      email: FormControl<string | null>;
-      password: FormControl<string | null>;
-      fio: FormControl<string | null>;
+      email: FormControl<string | {nonNullable: boolean;} | null>;
+      password: FormControl<string | {nonNullable: boolean;} | null>;
+      fio: FormControl<string | {nonNullable: boolean;} | null>;
   }>;
 
   constructor (public loginService: LoginService,
@@ -26,28 +32,20 @@ export class LoginComponent {
     this.initForm();
   }
 
-  get f(): { [key: string]: AbstractControl } {
-    return this.loginForm.controls;
-  }
-
   initForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['',  [Validators.required]],
-      fio: ['']
+      email: ['', {nonNullable: true}, [Validators.required]],
+      password: ['', {nonNullable: true}, [Validators.required]],
+      fio: ['',{nonNullable: true}, [Validators.required]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      console.log("form invalid")
-      console.log(this.f['email'].errors)
-      console.log(this.f['password'].errors)
-      console.log(this.f['fio'].errors)
       /** Обрабатываем ошибку и прерываем выполнение метода*/
       return;
     }
-    console.log("form valid")
+
     let entry: User = {
       email: `${this.loginForm.value.email}`,
       password: `${this.loginForm.value.password}`,

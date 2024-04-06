@@ -26,7 +26,23 @@ export class AllMeetupsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.meetupService.fetchList()
+    // this.meetupService.fetchList()
+    this.refresh()
+  }
+
+
+  timerId: any
+
+  refresh () {
+      this.meetupService.fetchList()
+    // @ts-ignore
+    this.timerId = setTimeout(() => {
+      this.refresh();
+    },30000)
+  }
+
+  ngOnDestroy(){
+    clearTimeout(this.timerId);
   }
 
 }

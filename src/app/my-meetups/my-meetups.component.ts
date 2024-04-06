@@ -2,11 +2,10 @@ import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/
 import {RouterLink} from "@angular/router";
 import {LoginService} from "../services/login.service";
 import {MeetupServiceService} from "../services/meetup-service.service";
-import {map, Observable, Subject, Subscription, takeUntil, tap} from "rxjs";
+import {map} from "rxjs";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
 import {AsyncPipe, NgForOf} from "@angular/common";
-import {IMeetupRecord} from "../interfaces/imeetup-record";
-import {IUser} from "../interfaces/iuser";
+
 
 @Component({
   selector: 'app-my-meetups',
@@ -20,7 +19,7 @@ import {IUser} from "../interfaces/iuser";
   templateUrl: './my-meetups.component.html',
   styleUrl: './my-meetups.component.scss'
 })
-export class MyMeetupsComponent implements OnInit{
+export class MyMeetupsComponent implements OnInit, OnDestroy{
 
   // meetupList: Array<IMeetupRecord> = [];
 
@@ -31,11 +30,27 @@ export class MyMeetupsComponent implements OnInit{
 
 
   ngOnInit() {
-    this.meetupService.fetchList()
+    this.refresh()
   }
+
+
 
   get myMeetupsList () {
     return this.meetupService.meetupList.pipe(map(value => value.filter((value:any)=>value.createdBy === this.loginService.userId)))
   }
+
+  timerId: any
+
+  refresh () {
+     this.meetupService.fetchList()
+    // @ts-ignore
+    this.timerId = setTimeout(() => {
+      this.refresh();
+    },30000)
+  }
+
+ngOnDestroy(){
+  clearTimeout(this.timerId);
+}
 
 }

@@ -24,47 +24,18 @@ export class MyMeetupsComponent implements OnInit{
 
   // meetupList: Array<IMeetupRecord> = [];
 
-  constructor(private loginService: LoginService,
-              // private meetupService: MeetupServiceService,
-              private cdr: ChangeDetectorRef) {
+  constructor(private loginService: LoginService) {
   }
 
-  // private destroy: Subject<void> = new Subject();
   meetupService: MeetupServiceService = inject(MeetupServiceService);
 
 
   ngOnInit() {
-  //   console.log("component init")
-  // this.meetupService.getMeetupsData$()
-  //   .pipe(tap(res =>console.log("tap called")))
-  //   this.cdr.markForCheck();
     this.meetupService.fetchList()
   }
 
-  // private subscription: Subscription | undefined;
-  // public renderMyMeetups() {
-  //   // console.log(this.loginService.userId)
-  //   this.subscription = this.meetupService.requestMeetups()
-  //     .pipe(map(values => values.filter((value: any) => value.createdBy === this.loginService.userId)))
-  //     .subscribe(result => {
-  //       this.meetupList = result
-  //       this.cdr.markForCheck()
-  //       })
-  //
-  // }
-
-  // ngOnDestroy() {
-  //   if (this.subscription) {
-  //     this.subscription.unsubscribe();
-  //     console.log('unsubscribe');
-  //   }
-  // }
-
-  //  ngOnDestroy(): void {
-  //   this.destroy.next();
-  //   this.destroy.complete();
-  // }
-
-
+  get myMeetupsList () {
+    return this.meetupService.meetupList.pipe(map(value => value.filter((value:any)=>value.createdBy === this.loginService.userId)))
+  }
 
 }

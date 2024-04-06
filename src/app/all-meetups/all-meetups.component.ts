@@ -1,52 +1,32 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {filter, map, tap, Observable, Subscription} from "rxjs";
 import {LoginService} from "../services/login.service";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {IUser} from "../interfaces/iuser";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
-import {NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-all-meetups',
   standalone: true,
   imports: [
     MeetupRecordComponent,
-    NgForOf
+    NgForOf,
+    AsyncPipe
   ],
   templateUrl: './all-meetups.component.html',
   styleUrl: './all-meetups.component.scss'
 })
-export class AllMeetupsComponent {
+export class AllMeetupsComponent implements OnInit {
 
-  meetupList: Array<IMeetupRecord> = [];
+  constructor(private loginService: LoginService) { }
 
-  constructor(private loginService: LoginService,
-              private meetupService: MeetupServiceService,
-              private cdr: ChangeDetectorRef) {
+  meetupService: MeetupServiceService = inject(MeetupServiceService);
+
+
+  ngOnInit() {
+    this.meetupService.fetchList()
   }
-  //
-  // ngOnInit() {
-  //   this.renderAllMeetups()
-  // }
-  //
-  // private subscription: Subscription | undefined;
-  // public renderAllMeetups() {
-  //   // console.log(this.loginService.userId)
-  //   this.subscription = this.meetupService.requestMeetups()
-  //     // .pipe(map(values => values.filter((value: any) => value.createdBy === this.loginService.userId)))
-  //     .subscribe(result => {
-  //       this.meetupList = result
-  //       this.cdr.markForCheck()
-  //     })
-  //
-  // }
-  //
-  // ngOnDestroy() {
-  //   if (this.subscription) {
-  //     this.subscription.unsubscribe();
-  //     console.log('unsubscribe');
-  //   }
-  // }
 
 }

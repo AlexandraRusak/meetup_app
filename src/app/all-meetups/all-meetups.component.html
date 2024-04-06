@@ -1,5 +1,5 @@
-<!--<div class="container">-->
-<!--    <div *ngFor="let meetupRecord of meetupList">-->
-<!--      <app-meetup-record [data]="meetupRecord" />-->
-<!--    </div>-->
-<!--</div>-->
+<div class="container">
+    <div *ngFor="let meetupRecord of meetupService.meetupList | async">
+      <app-meetup-record [data]="meetupRecord" />
+    </div>
+</div>

@@ -26,18 +26,7 @@ export class MeetupServiceService {
     return this.meetupsData$.asObservable()
   }
 
-  // get myMeetupList(): Observable<IMeetupRecord[]> {
-  // //   return this.meetupsData$.asObservable().pipe(map(values => values.filter((value: any) => value.createdBy === this.loginService.userId)))
-  // //   //     .subscribe(result => {
-  // //   //       this.meetupList = result
-  // //   //       this.cdr.markForCheck()
-  // //   //       })
-  // //   //
-  //
-  // }
-
-
-  public createMeetup(meetupEntry: MeetupEntry): void {
+    public createMeetup(meetupEntry: MeetupEntry): void {
     // console.log("value received")
     // console.log(meetupEntry)
     this.httpClient

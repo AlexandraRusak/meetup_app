@@ -3,7 +3,7 @@ import {map, Subscription} from "rxjs";
 import {InfoUserAdmin} from "../interfaces/info-user-admin";
 import {AdminService} from "../services/admin.service";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
-import {NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf} from "@angular/common";
 import {UserInfoComponent} from "../user-info/user-info.component";
 
 @Component({
@@ -12,40 +12,41 @@ import {UserInfoComponent} from "../user-info/user-info.component";
   imports: [
     MeetupRecordComponent,
     NgForOf,
-    UserInfoComponent
+    UserInfoComponent,
+    AsyncPipe
   ],
   templateUrl: './all-users.component.html',
   styleUrl: './all-users.component.scss'
 })
-export class AllUsersComponent implements OnInit, OnDestroy {
+export class AllUsersComponent implements OnInit {
 
   usersList: Array<InfoUserAdmin> = [];
 
-  constructor(private adminService: AdminService,
+  constructor(public adminService: AdminService,
               private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.renderAllUsers()
+    this.adminService.fetchList()
   }
-
-  private subscription: Subscription | undefined;
-  public renderAllUsers() {
-     this.subscription = this.adminService.requestUsers()
-      // .pipe(map(values => values.filter((value: any) => value.createdBy === this.loginService.userId)))
-      .subscribe(result => {
-        this.usersList = result
-        console.log(this.usersList)
-        this.cdr.markForCheck()
-      })
-
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-      console.log('unsubscribe');
-    }
-  }
+  //
+  // private subscription: Subscription | undefined;
+  // public renderAllUsers() {
+  //    this.subscription = this.adminService.requestUsers()
+  //     // .pipe(map(values => values.filter((value: any) => value.createdBy === this.loginService.userId)))
+  //     .subscribe(result => {
+  //       this.usersList = result
+  //       console.log(this.usersList)
+  //       this.cdr.markForCheck()
+  //     })
+  //
+  // }
+  //
+  // ngOnDestroy() {
+  //   if (this.subscription) {
+  //     this.subscription.unsubscribe();
+  //     console.log('unsubscribe');
+  //   }
+  // }
 
 }

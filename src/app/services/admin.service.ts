@@ -18,6 +18,7 @@ export class AdminService {
 
   fetchList() {
     this.httpClient.get<InfoUserAdmin[]>(`${environment.baseUrl}/user`)
+      .pipe(tap(receivedItems =>console.log(receivedItems)))
       .subscribe(receivedItems => this.usersData$.next(receivedItems));
   }
   get usersList(): Observable<InfoUserAdmin[]> {
@@ -26,7 +27,7 @@ export class AdminService {
 
   fetchRolesList() {
     this.httpClient.get<Role[]>(`${environment.baseUrl}/role`)
-      .pipe(tap(receivedItems =>console.log(receivedItems)))
+      // .pipe(tap(receivedItems =>console.log(receivedItems)))
       .subscribe(receivedItems => this.rolesData$.next(receivedItems));
   }
 

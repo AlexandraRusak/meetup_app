@@ -25,14 +25,14 @@ export class AdminService {
     return this.usersData$.asObservable()
   }
 
-  fetchRolesList() {
-    this.httpClient.get<Role[]>(`${environment.baseUrl}/role`)
-      // .pipe(tap(receivedItems =>console.log(receivedItems)))
-      .subscribe(receivedItems => this.rolesData$.next(receivedItems));
-  }
-
-  get rolesList(): Observable<Role[]> {
-    return this.rolesData$.asObservable()
-  }
+  // fetchRolesList() {
+  //   this.httpClient.get<Role[]>(`${environment.baseUrl}/role`)
+  //     // .pipe(tap(receivedItems =>console.log(receivedItems)))
+  //     .subscribe(receivedItems => this.rolesData$.next(receivedItems));
+  // }
+  //
+  // get rolesList(): Observable<Role[]> {
+  //   return this.rolesData$.asObservable()
+  // }
 
 }

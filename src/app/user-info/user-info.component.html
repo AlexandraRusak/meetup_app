@@ -1,7 +1,7 @@
 <section>
   <p class="item">{{ data.email }}</p>
   <p class="password item">{{ data.password }}</p>
-  <p class="item">ROLE</p>
+  <div class="role"><p *ngFor="let Role of data.roles">{{Role.name.toLowerCase()}}</p></div>
   <div class="item buttons">
     <button class="ax-button" data-id="{{data.id}}">
 

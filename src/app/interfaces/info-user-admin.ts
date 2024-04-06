@@ -1,6 +1,11 @@
+import {Role} from "./role";
+
 export interface InfoUserAdmin {
-  id: number;
+  createdAt: string;
   email: string;
-  password: string;
   fio: string;
+  id: number
+  password: string;
+  roles: Role[];
+  updatedAt: string;
 }

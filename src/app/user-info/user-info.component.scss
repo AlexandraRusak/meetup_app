@@ -29,6 +29,21 @@ button {
   background-color: var(--accent-back-color)
 }
 
+.role {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-back-color);
+  align-items: center;
+}
+
+.role>p {
+  background-color: var(--accent-back-color);
+  padding: 0;
+  margin: 0;
+}
+
 svg {
   background-color: var(--accent-back-color)
 }

@@ -28,7 +28,7 @@ export class AllUsersComponent implements OnInit {
 
   ngOnInit() {
     this.adminService.fetchList()
-    this.adminService.fetchRolesList()
+    // this.adminService.fetchRolesList()
   }
   //
   // private subscription: Subscription | undefined;

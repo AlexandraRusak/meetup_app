@@ -1,0 +1,6 @@
+section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border: 0.5px solid var(--accent-color-violet)
+}
+

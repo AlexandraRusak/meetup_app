@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="registerForm" (submit)="onSubmit()">
+    <div class="div-form">
+      <label for="email">
+        <input class="unset-input input input-local" id="email" type="email" placeholder="эл.почта" formControlName="email">
+      </label>
+      <label for="password">
+        <input class="unset-input input input-local" id="password" type="password" placeholder="пароль" formControlName="password">
+      </label>
+      <label for="fio">
+        <input class="unset-input input input-local" id="fio" type="text" placeholder="ФИО" formControlName="fio">
+      </label>
+        <button class="ax-button btn register-btn" type="submit">Зарегистрироваться</button>
+      </div>
+  </form>
+</div>

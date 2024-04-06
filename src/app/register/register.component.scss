@@ -1,0 +1,23 @@
+form {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-form {
+  display: grid;
+  //text-align: center;
+  width: 342px;
+  row-gap: 26px;
+}
+
+.input-local {
+  width: 342px;
+}
+
+.register-btn {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 0;
+}

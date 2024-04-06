@@ -1,0 +1,19 @@
+<div class="container">
+  <form [formGroup]="loginForm" (submit)="onSubmit()">
+    <div class="div-form">
+    <label for="email">
+      <input class="unset-input input input-local" id="email" type="email" placeholder="эл.почта" formControlName="email">
+    </label>
+    <label for="password">
+      <input class="unset-input input input-local" id="password" type="password" placeholder="пароль" formControlName="password">
+    </label>
+    <label for="fio">
+      <input class="unset-input input input-local" id="fio" type="text" placeholder="ФИО" formControlName="fio">
+    </label>
+    <div class="button-link">
+      <a routerLink="/register" class="link">Зарегистрироваться</a>
+      <button class="ax-button btn" type="submit">Войти</button>
+    </div>
+</div>
+  </form>
+</div>

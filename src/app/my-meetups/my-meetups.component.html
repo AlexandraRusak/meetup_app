@@ -1,0 +1,7 @@
+<div class="container">
+<div *ngFor="let meetupRecord of meetupService.meetupList | async">
+<app-meetup-record [data]="meetupRecord" />
+</div>
+
+<a routerLink="/meetup-entry" class="create-meetup-link">Создать митап</a>
+</div>

@@ -1,7 +1,6 @@
-<div class="container">
   <div class="container">
     <div *ngFor="let infoUserAdmin of adminService.usersList | async">
       <app-user-info [data]="infoUserAdmin" />
     </div>
   </div>
-</div>
+

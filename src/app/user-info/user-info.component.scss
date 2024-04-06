@@ -1,6 +1,41 @@
 section {
+  width: 700px;
+  margin-block: 10px;
+  margin-inline: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  border: 0.5px solid var(--accent-color-violet)
+  grid-template-columns: 190px 300px 100px 110px;
+  outline: 0.5px solid var(--add-text-color);
+  background-color: var(--accent-back-color)
 }
 
+section>* {
+  background-color: var(--accent-back-color)
+}
+
+.password {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+p {
+  padding-block: 5px;
+  padding-inline: 5px;
+  text-align: center;
+  }
+
+button {
+  border: 2px solid var(--accent-color-orange);
+  border-radius: 5px;
+  background-color: var(--accent-back-color)
+}
+
+svg {
+  background-color: var(--accent-back-color)
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}

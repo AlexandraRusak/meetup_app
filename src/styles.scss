@@ -6,19 +6,17 @@
   --accent-text-color: #008697;
   --accent-color-violet: #4C3F78;
   --accent-color-orange: #B85526;
-
-    --font-xxl: 2rem;
-    --font-xl: 1.5rem;
-    --font-lg: 1.25rem;
-    --font-md: 1rem;
-    --font-sm: 0.75rem;
-
+    //
+    //--font-xxl: 2rem;
+    //--font-xl: 1.5rem;
+    //--font-lg: 1.25rem;
+    //--font-md: 1rem;
+    //--font-sm: 0.75rem;
 }
 
 * {
   box-sizing: border-box;
-  //outline: 1px solid white;
-  background-color: var(--main-back-color);
+   background-color: var(--main-back-color);
   color: var(--add-text-color);
   font-family: system-ui;
   font-size: 1rem;
@@ -33,11 +31,11 @@ body {
   max-width: 1220px;
   padding-inline: 20px;
   margin-inline: auto;
-}
+ }
 
 //fonts
 
-h2 {
+h2, h3 {
   color: var(--main-text-color)
 }
 

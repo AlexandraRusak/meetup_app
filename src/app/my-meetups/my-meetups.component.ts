@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {LoginService} from "../services/login.service";
 import {MeetupServiceService} from "../services/meetup-service.service";
@@ -17,7 +17,8 @@ import {AsyncPipe, NgForOf} from "@angular/common";
     AsyncPipe,
   ],
   templateUrl: './my-meetups.component.html',
-  styleUrl: './my-meetups.component.scss'
+  styleUrl: './my-meetups.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyMeetupsComponent implements OnInit, OnDestroy{
 
@@ -46,7 +47,7 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
     // @ts-ignore
     this.timerId = setTimeout(() => {
       this.refresh();
-    },30000)
+    },60000)
   }
 
 ngOnDestroy(){

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {filter, map, tap, Observable, Subscription} from "rxjs";
 import {LoginService} from "../services/login.service";
@@ -16,7 +16,8 @@ import {AsyncPipe, NgForOf} from "@angular/common";
     AsyncPipe
   ],
   templateUrl: './all-meetups.component.html',
-  styleUrl: './all-meetups.component.scss'
+  styleUrl: './all-meetups.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AllMeetupsComponent implements OnInit {
 
@@ -38,7 +39,7 @@ export class AllMeetupsComponent implements OnInit {
     // @ts-ignore
     this.timerId = setTimeout(() => {
       this.refresh();
-    },30000)
+    },60000)
   }
 
   ngOnDestroy(){

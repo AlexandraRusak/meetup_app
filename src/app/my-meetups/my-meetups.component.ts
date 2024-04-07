@@ -5,6 +5,7 @@ import {MeetupServiceService} from "../services/meetup-service.service";
 import {map} from "rxjs";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
 import {AsyncPipe, NgForOf} from "@angular/common";
+import {IUser} from "../interfaces/iuser";
 
 
 @Component({
@@ -28,6 +29,7 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
   }
 
   meetupService: MeetupServiceService = inject(MeetupServiceService);
+  // private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
 
 
   get myMeetupsList () {
-    return this.meetupService.meetupList.pipe(map(value => value.filter((value:any)=>value.createdBy === this.loginService.userId)))
+    return this.meetupService.meetupList.pipe(
+      map(value => value.filter((value:any)=>value.createdBy === this.loginService.userId)))
   }
 
   timerId: any
@@ -48,6 +51,7 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
     this.timerId = setTimeout(() => {
       this.refresh();
     },60000)
+    // this.cdr.markForCheck();
   }
 
 ngOnDestroy(){

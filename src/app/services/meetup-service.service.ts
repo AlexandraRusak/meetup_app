@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MeetupEntry} from "../interfaces/meetup-entry";
-import {User} from "../interfaces/user";
 import {environment} from "../../environments/environment";
-import {Token} from "./login.service";
 import {BehaviorSubject, map, Observable, ReplaySubject, Subscription, tap} from "rxjs";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {AddUserToMeetup} from "../interfaces/add-user-to-meetup";
@@ -22,6 +20,7 @@ export class MeetupServiceService {
 
   fetchList() {
     this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
+      .pipe(map(value => value.filter(meetupRecord => meetupRecord.owner !== null)))
       .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
   }
 
@@ -51,6 +50,7 @@ export class MeetupServiceService {
       .subscribe({
         next: value => {
           console.log(value)
+          this.fetchList()
         },
         error: err => {
           console.error(err);
@@ -64,6 +64,7 @@ export class MeetupServiceService {
       .subscribe({
         next: value => {
           console.log(value)
+          this.fetchList()
         },
         error: err => {
           console.error(err);

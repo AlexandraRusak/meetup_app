@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, inject, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {IUser} from "../interfaces/iuser";
 import {NgIf} from "@angular/common";
@@ -51,6 +51,7 @@ export class MeetupRecordComponent implements OnInit {
     this.checkIfICanGo()
     this.checkIfICanEdit()
     this.checkIfICommitted()
+    // this.cdr.markForCheck();
   }
 
   get startTime(): string {

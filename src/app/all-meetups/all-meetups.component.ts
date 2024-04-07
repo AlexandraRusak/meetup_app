@@ -47,3 +47,6 @@ export class AllMeetupsComponent implements OnInit {
   }
 
 }
+
+// ,
+// map(value => value.filter(meetupRecord => meetupRecord.owner !== null))

@@ -12,5 +12,40 @@
   width: fit-content;
   margin-left: auto;
   margin-right: 0;
+  margin-bottom: 20px;
 }
+
+input {
+
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-block: 20px;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+.form-line {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-areas: "form-label" "form-input";
+}
+
+
+
+//.form-line {
+//  display: flex;
+//}
+
+//input, textarea {
+//  width: 100%;
+//
+//}
+
+
 

@@ -4,60 +4,60 @@
     <div class="form">
 
       <div class="form-line">
-        <label class="form-label" for="heading">Название:
+        <label class="form-label" for="heading">Название: </label>
           <input class="unset-input input form-input" type="text" id="heading" formControlName="name">
-        </label>
+
       </div>
 
-      <div class="date-time form-line">
+      <div class="date-time">
         <!--      <label for="m-date">Дата:-->
         <!--        <input class="unset-input input" type="date" id="m-date" formControlName="m_date">-->
         <!--      </label>-->
-        <label for="m-time">Дата и время:
+        <label for="m-time">Дата и время:</label>
           <input class="unset-input input" type="datetime-local" id="m-time" formControlName="time">
-        </label>
-        <label for="m-duration">Продолжительность (мин):
+
+        <label class="duration" for="m-duration">Продолжительность (мин):</label>
           <input class="unset-input input" type="text" id="m-duration" formControlName="duration">
-        </label>
+
       </div>
 
       <div class="form-line">
-        <label for="venue">Место:
+        <label for="venue">Место:</label>
           <input class="unset-input input" type="text" id="venue" formControlName="location">
-        </label>
+
       </div>
 
       <div class="form-line">
-        <label for="description">Описание:
-          <textarea maxlength="250" class="unset-input input" name="" id="description" cols="30" rows="10"
+        <label for="description">Описание:</label>
+          <textarea maxlength="250" class="unset-input input" name="" id="description" cols="30" rows="5"
                     formControlName="description"></textarea>
-        </label>
+
       </div>
       <div class="form-line">
-        <label for="target-aud">Целевая аудитория:
-          <textarea maxlength="250" class="unset-input input" name="" id="target-aud" cols="30" rows="10"
+        <label for="target-aud">Целевая аудитория:</label>
+          <textarea maxlength="250" class="unset-input input" name="" id="target-aud" cols="30" rows="3"
                     formControlName="target_audience"></textarea>
-        </label>
+
       </div>
       <div class="form-line">
-        <label for="need-to-know">Что нужно знать:
-          <textarea maxlength="250" class="unset-input input" name="" id="need-to-know" cols="30" rows="10"
+        <label for="need-to-know">Что нужно знать: </label>
+          <textarea maxlength="250" class="unset-input input" name="" id="need-to-know" cols="30" rows="3"
                     formControlName="need_to_know"></textarea>
-        </label>
+
       </div>
 
       <div class="form-line">
-        <label for="will_happen">Что планируется:
-          <textarea maxlength="250" class="unset-input input" name="" id="will_happen" cols="30" rows="10"
+        <label for="will_happen">Что планируется:</label>
+          <textarea maxlength="250" class="unset-input input" name="" id="will_happen" cols="30" rows="3"
                     formControlName="will_happen"></textarea>
-        </label>
+
       </div>
 
       <div class="form-line">
-        <label for="reason_to_come">Зачем посещать:
-          <textarea maxlength="250" class="unset-input input" name="" id="reason_to_come" cols="30" rows="10"
+        <label for="reason_to_come">Зачем посещать:</label>
+          <textarea maxlength="250" class="unset-input input" name="" id="reason_to_come" cols="30" rows="3"
                     formControlName="reason_to_come"></textarea>
-        </label>
+
       </div>
 
       <button class="ax-button btn btn-local" type="submit">Создать митап</button>

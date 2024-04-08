@@ -16,4 +16,5 @@ export interface IMeetupRecord {
   updatedAt:string;
   users: Array<IUser>;
   will_happen:string;
+  filtered?: boolean;
 }

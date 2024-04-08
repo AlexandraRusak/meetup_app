@@ -1,11 +1,13 @@
 import {Component, Input} from '@angular/core';
-import {NgIf} from "@angular/common";
+import {formatDate, NgIf} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {MeetupEntry} from "../interfaces/meetup-entry";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {Observable} from "rxjs";
+import {MatFormField, MatHint, MatSuffix} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-edit-meetup',
@@ -13,7 +15,11 @@ import {Observable} from "rxjs";
   imports: [
     NgIf,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatHint,
+    MatSuffix,
+    MatInput,
+    MatFormField
   ],
   templateUrl: './edit-meetup.component.html',
   styleUrl: './edit-meetup.component.scss'
@@ -64,7 +70,7 @@ export class EditMeetupComponent {
     this.editMeetupForm = new FormGroup ({
       name: new FormControl (`${this.dataToEdit.name}`, [Validators.required]),
       description: new FormControl (`${this.dataToEdit.description}`, [Validators.required]),
-      time: new FormControl (new Date(`${this.dataToEdit.time}`), [Validators.required]),
+      time: new FormControl (formatDate(this.dataToEdit.time, 'yyyy-MM-ddTHH:mm', 'en'), [Validators.required]),
       duration: new FormControl (Number(`${this.dataToEdit.duration}`), [Validators.required]),
       location: new FormControl (`${this.dataToEdit.location}`, [Validators.required]),
       target_audience: new FormControl (`${this.dataToEdit.target_audience}`, [Validators.required]),
@@ -92,6 +98,7 @@ export class EditMeetupComponent {
       reason_to_come: `${this.editMeetupForm.value.reason_to_come}`,
     }
     console.log("value sent")
+    console.log(this.editMeetupForm.value)
     console.log(meetupEntry)
     this.meetupService.editMeetup(this.dataToEdit.id, meetupEntry)
   }

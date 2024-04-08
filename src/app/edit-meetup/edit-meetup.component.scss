@@ -75,3 +75,12 @@ textarea.ng-touched.ng-invalid {
   font-size: 0.7rem;
   background-color: var(--accent-back-color);
 }
+
+mat-form-field >* {
+  all: unset;
+  background-color: var(--accent-back-color)!important;
+}
+
+mat-datepicker-toggle {
+  background-color: var(--accent-back-color)!important;
+}

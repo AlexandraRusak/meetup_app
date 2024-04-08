@@ -6,6 +6,7 @@ import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {IUser} from "../interfaces/iuser";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
 import {AsyncPipe, NgForOf} from "@angular/common";
+import {SearchBarComponent} from "../search-bar/search-bar.component";
 
 @Component({
   selector: 'app-all-meetups',
@@ -13,7 +14,8 @@ import {AsyncPipe, NgForOf} from "@angular/common";
   imports: [
     MeetupRecordComponent,
     NgForOf,
-    AsyncPipe
+    AsyncPipe,
+    SearchBarComponent
   ],
   templateUrl: './all-meetups.component.html',
   styleUrl: './all-meetups.component.scss',

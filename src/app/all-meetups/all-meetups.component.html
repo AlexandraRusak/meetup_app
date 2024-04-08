@@ -1,4 +1,5 @@
 <div class="container">
+  <app-search-bar></app-search-bar>
     <div *ngFor="let meetupRecord of meetupService.meetupList | async">
       <app-meetup-record [data]="meetupRecord" />
     </div>

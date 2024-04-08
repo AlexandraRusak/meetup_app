@@ -35,8 +35,9 @@ export class MeetupServiceService {
       .post<any>(`${environment.baseUrl}/meetup`, meetupEntry)
       .subscribe({
         next: value => {
-          console.log(value)
-          console.log(value.createdBy)
+          // console.log(value)
+          // console.log(value.createdBy)
+          this.router.navigate(["my-meetups"])
         },
         error: err => {
           console.error(err);

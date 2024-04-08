@@ -65,17 +65,19 @@ input, textarea {
   text-align: center;
 }
 
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+  border-color: var(--accent-color-orange);
+}
+
+.validation-error > span {
+  color: var(--accent-color-orange);
+  font-size: 0.7rem;
+  background-color: var(--accent-back-color);
+}
 
 
 
-//.form-line {
-//  display: flex;
-//}
-
-//input, textarea {
-//  width: 100%;
-//
-//}
 
 
 

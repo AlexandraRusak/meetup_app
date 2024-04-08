@@ -2,13 +2,23 @@
   <form [formGroup]="loginForm" (submit)="onSubmit()">
     <div class="div-form">
     <label for="email">
-      <input class="unset-input input input-local" id="email" type="email" placeholder="эл.почта" formControlName="email">
+      <input  class="unset-input input input-local" id="email" type="text" placeholder="эл.почта" formControlName="email">
+      <div class="validation-error" *ngIf="loginForm.controls['email'].invalid&& (loginForm.controls['email'].touched || loginForm.controls['email'].dirty)">
+        <span *ngIf="loginForm.controls['email'].errors?.['required']">Это поле обязательное</span>
+        <span *ngIf="loginForm.controls['email'].errors?.['email']">Неверный формат email</span>
+      </div>
     </label>
     <label for="password">
       <input class="unset-input input input-local" id="password" type="password" placeholder="пароль" formControlName="password">
+      <div class="validation-error" *ngIf="loginForm.controls['password'].invalid&& (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">
+        <span *ngIf="loginForm.controls['password'].errors?.['required']">Это поле обязательное</span>
+      </div>
     </label>
     <label for="fio">
       <input class="unset-input input input-local" id="fio" type="text" placeholder="ФИО" formControlName="fio">
+      <div class="validation-error" *ngIf="loginForm.controls['fio'].invalid&& (loginForm.controls['fio'].touched || loginForm.controls['fio'].dirty)">
+        <span *ngIf="loginForm.controls['fio'].errors?.['required']">Это поле обязательное</span>
+      </div>
     </label>
     <div class="button-link">
       <a routerLink="/register" class="link">Зарегистрироваться</a>

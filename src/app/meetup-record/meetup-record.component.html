@@ -6,7 +6,8 @@
     <div class="name-users">
       <h2 class="name">{{ data.name }}</h2>
       <p class="users">{{ data.users.length }} подписчиков</p>
-      <p class="users" *ngIf="committed">Я иду</p>
+      <p class="users" *ngIf="committed&&expected">Я иду</p>
+      <p class="users" *ngIf="committed&&!expected">участвовал</p>
     </div>
 
     <p class="desc">{{ data.description }}</p>

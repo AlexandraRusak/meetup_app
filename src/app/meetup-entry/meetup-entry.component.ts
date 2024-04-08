@@ -8,67 +8,44 @@ import {
   ReactiveFormsModule,
   Validators
 } from "@angular/forms";
-// import {LoginService} from "../services/login.service";
 import {MeetupEntry} from "../interfaces/meetup-entry";
 import {MeetupServiceService} from "../services/meetup-service.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-meetup-entry',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './meetup-entry.component.html',
   styleUrl: './meetup-entry.component.scss'
 })
 export class MeetupEntryComponent {
 
-  createMeetupForm!: FormGroup<{
-    name: FormControl<string | null>;
-    description: FormControl<string | null>;
-    time: FormControl<string | null>;
-    // m_date: FormControl<string | null>;
-    duration: FormControl<number | null>;
-    location: FormControl<string | null>;
-    target_audience: FormControl<string | null>;
-    need_to_know: FormControl<string | null>;
-    will_happen: FormControl<string | null>;
-    reason_to_come: FormControl<string | null>;
-  }>;
+  createMeetupForm: FormGroup
 
   constructor (private formBuilder: FormBuilder,
-               public meetupService: MeetupServiceService) {  }
+               public meetupService: MeetupServiceService) {
 
-  ngOnInit() {
-    this.initForm();
-  }
-
-  get f(): { [key: string]: AbstractControl } {
-    return this.createMeetupForm.controls;
-  }
-
-  initForm() {
-    this.createMeetupForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      time: ['', [Validators.required]],
-      // m_date: ['', [Validators.required]],
-      duration: [0, [Validators.required]],
-      location: ['', [Validators.required]],
-      target_audience: ['', [Validators.required]],
-      need_to_know: ['', [Validators.required]],
-      will_happen: ['', [Validators.required]],
-      reason_to_come: ['', [Validators.required]],
+    this.createMeetupForm = new FormGroup ({
+      name: new FormControl ("", [Validators.required]),
+      description: new FormControl ("", [Validators.required]),
+      time: new FormControl ("", [Validators.required]),
+      duration: new FormControl (0, [Validators.required]),
+      location: new FormControl ("", [Validators.required]),
+      target_audience: new FormControl ("", [Validators.required]),
+      need_to_know: new FormControl ("", [Validators.required]),
+      will_happen: new FormControl ("", [Validators.required]),
+      reason_to_come: new FormControl ("", [Validators.required])
     })
   }
 
-
     onSubmit() {
+    this.createMeetupForm.markAllAsTouched()
       if (this.createMeetupForm.invalid) {
-        console.log("form invalid")
-
-        /** Обрабатываем ошибку и прерываем выполнение метода*/
         return;
       }
 

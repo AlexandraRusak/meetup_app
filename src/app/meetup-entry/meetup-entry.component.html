@@ -4,57 +4,89 @@
     <div class="form">
 
       <div class="form-line">
-        <label class="form-label" for="heading">Название: </label>
+        <label class="form-label" for="heading">Название:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['name'].invalid&& (createMeetupForm.controls['name'].touched || createMeetupForm.controls['name'].dirty)">
+            <span *ngIf="createMeetupForm.controls['name'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <input class="unset-input input form-input" type="text" id="heading" formControlName="name">
-
       </div>
 
       <div class="date-time">
-        <!--      <label for="m-date">Дата:-->
-        <!--        <input class="unset-input input" type="date" id="m-date" formControlName="m_date">-->
-        <!--      </label>-->
-        <label for="m-time">Дата и время:</label>
+        <label for="m-time">Дата и время:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['time'].invalid&& (createMeetupForm.controls['time'].touched || createMeetupForm.controls['time'].dirty)">
+            <span *ngIf="createMeetupForm.controls['time'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <input class="unset-input input" type="datetime-local" id="m-time" formControlName="time">
 
-        <label class="duration" for="m-duration">Продолжительность (мин):</label>
+        <label class="duration" for="m-duration">Продолжительность (мин):
+          <div class="validation-error" *ngIf="createMeetupForm.controls['duration'].invalid&& (createMeetupForm.controls['duration'].touched || createMeetupForm.controls['duration'].dirty)">
+            <span *ngIf="createMeetupForm.controls['duration'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <input class="unset-input input" type="text" id="m-duration" formControlName="duration">
 
       </div>
 
       <div class="form-line">
-        <label for="venue">Место:</label>
+        <label for="venue">Место:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['location'].invalid&& (createMeetupForm.controls['location'].touched || createMeetupForm.controls['location'].dirty)">
+            <span *ngIf="createMeetupForm.controls['location'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <input class="unset-input input" type="text" id="venue" formControlName="location">
 
       </div>
 
       <div class="form-line">
-        <label for="description">Описание:</label>
+        <label for="description">Описание:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['description'].invalid&& (createMeetupForm.controls['description'].touched || createMeetupForm.controls['description'].dirty)">
+            <span *ngIf="createMeetupForm.controls['description'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <textarea maxlength="250" class="unset-input input" name="" id="description" cols="30" rows="5"
                     formControlName="description"></textarea>
 
       </div>
       <div class="form-line">
-        <label for="target-aud">Целевая аудитория:</label>
+        <label for="target-aud">Целевая аудитория:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['target_audience'].invalid&& (createMeetupForm.controls['target_audience'].touched || createMeetupForm.controls['target_audience'].dirty)">
+            <span *ngIf="createMeetupForm.controls['target_audience'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <textarea maxlength="250" class="unset-input input" name="" id="target-aud" cols="30" rows="3"
                     formControlName="target_audience"></textarea>
 
       </div>
       <div class="form-line">
-        <label for="need-to-know">Что нужно знать: </label>
+        <label for="need-to-know">Что нужно знать:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['need_to_know'].invalid&& (createMeetupForm.controls['need_to_know'].touched || createMeetupForm.controls['need_to_know'].dirty)">
+            <span *ngIf="createMeetupForm.controls['need_to_know'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <textarea maxlength="250" class="unset-input input" name="" id="need-to-know" cols="30" rows="3"
                     formControlName="need_to_know"></textarea>
 
       </div>
 
       <div class="form-line">
-        <label for="will_happen">Что планируется:</label>
+        <label for="will_happen">Что планируется:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['will_happen'].invalid&& (createMeetupForm.controls['will_happen'].touched || createMeetupForm.controls['will_happen'].dirty)">
+            <span *ngIf="createMeetupForm.controls['will_happen'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <textarea maxlength="250" class="unset-input input" name="" id="will_happen" cols="30" rows="3"
                     formControlName="will_happen"></textarea>
 
       </div>
 
       <div class="form-line">
-        <label for="reason_to_come">Зачем посещать:</label>
+        <label for="reason_to_come">Зачем посещать:
+          <div class="validation-error" *ngIf="createMeetupForm.controls['reason_to_come'].invalid&& (createMeetupForm.controls['reason_to_come'].touched || createMeetupForm.controls['reason_to_come'].dirty)">
+            <span *ngIf="createMeetupForm.controls['reason_to_come'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
           <textarea maxlength="250" class="unset-input input" name="" id="reason_to_come" cols="30" rows="3"
                     formControlName="reason_to_come"></textarea>
 

@@ -8,6 +8,7 @@ import {MyMeetupsComponent} from "./my-meetups/my-meetups.component";
 import {MeetupEntryComponent} from "./meetup-entry/meetup-entry.component";
 import {AllUsersComponent} from "./all-users/all-users.component";
 import {adminGuard} from "./guards/admin.guard";
+import {EditMeetupComponent} from "./edit-meetup/edit-meetup.component";
 
 export const routes: Routes = [
   {
@@ -32,13 +33,24 @@ export const routes: Routes = [
   },
   {
     path: 'my-meetups',
-    component: MyMeetupsComponent,
+    // component: MyMeetupsComponent,
     canActivate: [authGuard],
-  },
-  {
-    path: 'meetup-entry',
-    component: MeetupEntryComponent,
-    canActivate: [authGuard],
+    children: [
+      {
+        path: "",
+        component: MyMeetupsComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: "edit-meetup",
+        component: EditMeetupComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'meetup-entry',
+        component: MeetupEntryComponent,
+        canActivate: [authGuard],
+      }]
   },
   {
     path: 'all-users',

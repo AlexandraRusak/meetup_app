@@ -1,11 +1,12 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {LoginService} from "../services/login.service";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {map} from "rxjs";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
 import {AsyncPipe, NgForOf} from "@angular/common";
-import {IUser} from "../interfaces/iuser";
+import {EditMeetupComponent} from "../edit-meetup/edit-meetup.component";
+import {IMeetupRecord} from "../interfaces/imeetup-record";
 
 
 @Component({
@@ -16,6 +17,8 @@ import {IUser} from "../interfaces/iuser";
     MeetupRecordComponent,
     NgForOf,
     AsyncPipe,
+    RouterOutlet,
+    EditMeetupComponent,
   ],
   templateUrl: './my-meetups.component.html',
   styleUrl: './my-meetups.component.scss',
@@ -23,13 +26,10 @@ import {IUser} from "../interfaces/iuser";
 })
 export class MyMeetupsComponent implements OnInit, OnDestroy{
 
-  // meetupList: Array<IMeetupRecord> = [];
-
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
   meetupService: MeetupServiceService = inject(MeetupServiceService);
-  // private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
 
   ngOnInit() {
@@ -53,6 +53,21 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
     },60000)
     // this.cdr.markForCheck();
   }
+
+  // dataToEdit: IMeetupRecord | undefined
+  //
+  // // TODO: отработка ошибок и ситуации, когда не найден нужный митап
+  // findMeetup(meetupId: string) {
+  //   console.log(meetupId)
+  //   this.myMeetupsList.pipe(map(values => values.filter(value => value.id === Number(meetupId))))
+  //     .subscribe({
+  //       next: receivedItem => {
+  //       console.log(receivedItem)
+  //       this.dataToEdit = receivedItem[0]
+  //       console.log(this.dataToEdit)
+  //       this.router.navigate(['my-meetups/edit-meetup'])
+  //     }})
+  // }
 
 ngOnDestroy(){
   clearTimeout(this.timerId);

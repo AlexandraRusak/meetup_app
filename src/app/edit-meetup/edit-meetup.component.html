@@ -1,0 +1,100 @@
+<div class="container">
+  <h2>Редактирование митапа</h2>
+  <form [formGroup]="editMeetupForm" (submit)="onSubmit()">
+    <div class="form">
+
+      <div class="form-line">
+        <label class="form-label" for="heading">Название:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['name'].invalid&& (editMeetupForm.controls['name'].touched || editMeetupForm.controls['name'].dirty)">
+            <span *ngIf="editMeetupForm.controls['name'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <input class="unset-input input form-input" type="text" id="heading" formControlName="name">
+      </div>
+
+      <div class="date-time">
+        <label for="m-time">Дата и время:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['time'].invalid&& (editMeetupForm.controls['time'].touched || editMeetupForm.controls['time'].dirty)">
+            <span *ngIf="editMeetupForm.controls['time'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <input class="unset-input input" type="datetime-local" id="m-time" formControlName="time">
+
+        <label class="duration" for="m-duration">Продолжительность (мин):
+          <div class="validation-error" *ngIf="editMeetupForm.controls['duration'].invalid&& (editMeetupForm.controls['duration'].touched || editMeetupForm.controls['duration'].dirty)">
+            <span *ngIf="editMeetupForm.controls['duration'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <input class="unset-input input" type="text" id="m-duration" formControlName="duration">
+
+      </div>
+
+      <div class="form-line">
+        <label for="venue">Место:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['location'].invalid&& (editMeetupForm.controls['location'].touched || editMeetupForm.controls['location'].dirty)">
+            <span *ngIf="editMeetupForm.controls['location'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <input class="unset-input input" type="text" id="venue" formControlName="location">
+
+      </div>
+
+      <div class="form-line">
+        <label for="description">Описание:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['description'].invalid&& (editMeetupForm.controls['description'].touched || editMeetupForm.controls['description'].dirty)">
+            <span *ngIf="editMeetupForm.controls['description'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <textarea maxlength="250" class="unset-input input" name="" id="description" cols="30" rows="5"
+                  formControlName="description"></textarea>
+
+      </div>
+      <div class="form-line">
+        <label for="target-aud">Целевая аудитория:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['target_audience'].invalid&& (editMeetupForm.controls['target_audience'].touched || editMeetupForm.controls['target_audience'].dirty)">
+            <span *ngIf="editMeetupForm.controls['target_audience'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <textarea maxlength="250" class="unset-input input" name="" id="target-aud" cols="30" rows="3"
+                  formControlName="target_audience"></textarea>
+
+      </div>
+      <div class="form-line">
+        <label for="need-to-know">Что нужно знать:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['need_to_know'].invalid&& (editMeetupForm.controls['need_to_know'].touched || editMeetupForm.controls['need_to_know'].dirty)">
+            <span *ngIf="editMeetupForm.controls['need_to_know'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <textarea maxlength="250" class="unset-input input" name="" id="need-to-know" cols="30" rows="3"
+                  formControlName="need_to_know"></textarea>
+
+      </div>
+
+      <div class="form-line">
+        <label for="will_happen">Что планируется:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['will_happen'].invalid&& (editMeetupForm.controls['will_happen'].touched || editMeetupForm.controls['will_happen'].dirty)">
+            <span *ngIf="editMeetupForm.controls['will_happen'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <textarea maxlength="250" class="unset-input input" name="" id="will_happen" cols="30" rows="3"
+                  formControlName="will_happen"></textarea>
+
+      </div>
+
+      <div class="form-line">
+        <label for="reason_to_come">Зачем посещать:
+          <div class="validation-error" *ngIf="editMeetupForm.controls['reason_to_come'].invalid&& (editMeetupForm.controls['reason_to_come'].touched || editMeetupForm.controls['reason_to_come'].dirty)">
+            <span *ngIf="editMeetupForm.controls['reason_to_come'].errors?.['required']">Нужно заполнить</span>
+          </div>
+        </label>
+        <textarea maxlength="250" class="unset-input input" name="" id="reason_to_come" cols="30" rows="3"
+                  formControlName="reason_to_come"></textarea>
+
+      </div>
+
+      <button class="ax-button btn btn-local" type="submit">Редактировать митап</button>
+    </div>
+  </form>
+</div>
+
+

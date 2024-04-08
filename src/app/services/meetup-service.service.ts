@@ -13,7 +13,7 @@ import {AddUserToMeetup} from "../interfaces/add-user-to-meetup";
 export class MeetupServiceService {
 
   private meetupsData$: BehaviorSubject<Array<IMeetupRecord>> = new BehaviorSubject<Array<IMeetupRecord>>([])
-
+  private meetupToEdit$: BehaviorSubject<Array<IMeetupRecord>> = new BehaviorSubject<Array<IMeetupRecord>>([])
   constructor(private httpClient: HttpClient,
               private router: Router) {
   }
@@ -28,9 +28,24 @@ export class MeetupServiceService {
     return this.meetupsData$.asObservable()
   }
 
+  fetchMeetup(meetupId: string) {
+    this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
+      .pipe(map(value => value.filter(meetupRecord => meetupRecord.owner !== null)),
+        map(values =>values.filter(value =>value.id ===Number(meetupId))))
+      .subscribe({next: receivedItems =>{
+        console.log(receivedItems)
+        this.meetupToEdit$.next(receivedItems)
+          this.router.navigate(['my-meetups/edit-meetup'])
+      }});
+  }
+
+  get meetupToEdit () {
+    return this.meetupToEdit$.asObservable()
+  }
+
+
+
   public createMeetup(meetupEntry: MeetupEntry): void {
-    // console.log("value received")
-    // console.log(meetupEntry)
     this.httpClient
       .post<any>(`${environment.baseUrl}/meetup`, meetupEntry)
       .subscribe({
@@ -44,6 +59,36 @@ export class MeetupServiceService {
         },
       });
   }
+
+  public editMeetup (id:number, meetupEntry: MeetupEntry){
+    this.httpClient
+      .put<any>(`${environment.baseUrl}/meetup/${id}`, meetupEntry)
+      .subscribe({
+        next: value => {
+          console.log(value)
+          this.fetchList()
+          this.router.navigate(["my-meetups"])
+        },
+        error: err => {
+          console.error(err);
+        },
+      });
+  }
+
+
+ public deleteMeetup (id:string) {
+    this.httpClient.delete(`${environment.baseUrl}/meetup/${id}`)
+      .subscribe({
+        next: value => {
+          console.log(value)
+          this.fetchList()
+        },
+        error: err => {
+          console.error(err);
+        },
+      });
+ }
+
 
   public addUserToMeetup(obj: AddUserToMeetup) {
     this.httpClient

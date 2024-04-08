@@ -1,0 +1,77 @@
+.form {
+  display: grid;
+  column-gap: 20px;
+  row-gap: 40px;
+  width: 900px;
+  margin-inline: auto;
+
+}
+
+form,
+form>*,
+h2,
+label,
+div {
+  background-color: var(--accent-back-color);
+}
+
+.date-time {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 120px 210px 1fr 210px
+}
+
+
+.btn-local {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 20px;
+}
+
+input:hover, textarea:hover {
+  outline: 2px solid var(--accent-color-violet);
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-block: 20px;
+  padding-block: 20px;
+}
+
+input, textarea {
+  font-family: inherit;
+  border: 0.5px solid var(--accent-color-violet);
+}
+
+.form-line {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 120px 1fr;
+}
+
+.form-line > input {
+  width: 500px;
+}
+
+.date-time {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.duration {
+  text-align: center;
+}
+
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+  border-color: var(--accent-color-orange);
+}
+
+.validation-error > span {
+  color: var(--accent-color-orange);
+  font-size: 0.7rem;
+  background-color: var(--accent-back-color);
+}

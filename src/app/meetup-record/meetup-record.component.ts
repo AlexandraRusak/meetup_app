@@ -5,13 +5,15 @@ import {NgIf} from "@angular/common";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {LoginService} from "../services/login.service";
 import {AddUserToMeetup} from "../interfaces/add-user-to-meetup";
+import {RouterLink} from "@angular/router";
 
 
 @Component({
   selector: 'app-meetup-record',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './meetup-record.component.html',
   styleUrl: './meetup-record.component.scss'
@@ -101,5 +103,18 @@ export class MeetupRecordComponent implements OnInit {
     // this.cdr.markForCheck();
   }
 
+  // @Output()
+  // public editEvent = new EventEmitter();
+  handleEditClick($event: any) {
+    console.log($event.target.id)
+    // routerLink="/my-meetups/edit-meetup"
+    this.meetupService.fetchMeetup($event.target.id)
+  }
+
+  handleDeleteClick($event: any) {
+    console.log($event.target.id)
+    // routerLink="/my-meetups/edit-meetup"
+    this.meetupService.deleteMeetup($event.target.id)
+  }
 
 }

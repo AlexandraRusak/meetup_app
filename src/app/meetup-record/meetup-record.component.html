@@ -44,9 +44,10 @@
   </div>
 
   <div class="buttons">
-    <button (click)="handleIllGo()" class="ax-button btn edit" *ngIf="expected&&iCanGo&&!committed">Я пойду!</button>
-    <button (click)="handleIamNotGoing()" class="ax-button btn edit" *ngIf="expected&&committed">Я не пойду!</button>
-    <button class="ax-button btn edit" *ngIf="expected&&iCanEdit">Редактировать</button>
+    <button (click)="handleIllGo()" class="ax-button btn" *ngIf="expected&&iCanGo&&!committed">Я пойду!</button>
+    <button (click)="handleIamNotGoing()" class="ax-button btn" *ngIf="expected&&committed">Я не пойду!</button>
+    <button class="ax-button btn" *ngIf="expected&&iCanEdit" data-id="{{data.id}}" (click)="handleEditClick($event)">Редактировать</button>
+    <button *ngIf="expected&&iCanEdit" class="ax-button btn delete" data-id="{{data.id}}" (click)="handleDeleteClick($event)">Удалить</button>
     <button class="ax-button btn show-more" (click)="isVisible = !isVisible">
       {{ isVisible ? "∧" : "∨" }}
     </button>

@@ -1,7 +1,11 @@
+<router-outlet></router-outlet>
 <div class="container">
 <div *ngFor="let meetupRecord of myMeetupsList | async">
-<app-meetup-record [data]="meetupRecord" />
+<app-meetup-record
+  [data]="meetupRecord"></app-meetup-record>
+<!--  (editEvent)="findMeetup($event)"-->
+
 </div>
 
-<a routerLink="/meetup-entry" class="create-meetup-link">Создать митап</a>
+<a routerLink="/my-meetups/meetup-entry" class="create-meetup-link">Создать митап</a>
 </div>

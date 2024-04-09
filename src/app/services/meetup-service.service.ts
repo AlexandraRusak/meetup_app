@@ -24,6 +24,23 @@ export class MeetupServiceService {
       .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
   }
 
+  fetchFilteredList(filterStr: string) {
+    this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
+      .pipe(map(value => value.filter(meetupRecord => {
+        let tokens = filterStr.toLowerCase().split(' ')
+        if (meetupRecord.owner === null) {
+          return false
+        }
+          return tokens.every(token => (meetupRecord.name.includes(token))
+          ||(meetupRecord.owner.fio.toLowerCase().includes(token))
+          ||(meetupRecord.description.toLowerCase().includes(token))
+          ||(meetupRecord.time.toLocaleString().toLowerCase().includes(token)))
+      }
+      )))
+
+      .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
+  }
+
   get meetupList(): Observable<IMeetupRecord[]> {
     return this.meetupsData$.asObservable()
   }

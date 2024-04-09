@@ -1,6 +1,13 @@
 <div class="container">
   <app-search-bar></app-search-bar>
-    <div *ngFor="let meetupRecord of meetupService.meetupList | async">
-      <app-meetup-record [data]="meetupRecord" />
+  <ng-container *ngIf="meetupService.loaded | async; else loading">
+      <div *ngFor="let meetupRecord of meetupService.meetupList | async">
+        <app-meetup-record [data]="meetupRecord" />
+      </div>
+  </ng-container>
+  <ng-template #loading>
+    <div class="material-spinner-container">
+      <mat-spinner diameter="40"></mat-spinner>
     </div>
+  </ng-template>
 </div>

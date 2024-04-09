@@ -1,12 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {MeetupServiceService} from "../services/meetup-service.service";
-import {filter, map, tap, Observable, Subscription} from "rxjs";
 import {LoginService} from "../services/login.service";
-import {IMeetupRecord} from "../interfaces/imeetup-record";
-import {IUser} from "../interfaces/iuser";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {SearchBarComponent} from "../search-bar/search-bar.component";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-all-meetups',
@@ -15,7 +13,9 @@ import {SearchBarComponent} from "../search-bar/search-bar.component";
     MeetupRecordComponent,
     NgForOf,
     AsyncPipe,
-    SearchBarComponent
+    SearchBarComponent,
+    MatProgressSpinner,
+    NgIf
   ],
   templateUrl: './all-meetups.component.html',
   styleUrl: './all-meetups.component.scss',
@@ -23,13 +23,10 @@ import {SearchBarComponent} from "../search-bar/search-bar.component";
 })
 export class AllMeetupsComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
-
-  meetupService: MeetupServiceService = inject(MeetupServiceService);
-
+  constructor(public meetupService: MeetupServiceService) { }
 
   ngOnInit() {
-    // this.meetupService.fetchList()
+    this.meetupService.clearFilter()
     this.refresh()
   }
 
@@ -37,7 +34,7 @@ export class AllMeetupsComponent implements OnInit {
   timerId: any
 
   refresh () {
-      this.meetupService.fetchList()
+    this.meetupService.fetchList()
     // @ts-ignore
     this.timerId = setTimeout(() => {
       this.refresh();

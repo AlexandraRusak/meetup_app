@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgIf} from "@angular/common";
@@ -9,7 +9,8 @@ import {NgIf} from "@angular/common";
   imports: [RouterLink, NgIf, RouterLinkActive],
   // template: `<!--<p>test navbar template</p>-->`,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
 

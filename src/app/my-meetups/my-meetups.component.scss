@@ -10,6 +10,7 @@
   margin-left: auto;
   margin-right: 0;
   margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 .create-meetup-link:hover,
@@ -21,4 +22,9 @@ app-edit-meetup {
   display: none;
 }
 
-
+.material-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

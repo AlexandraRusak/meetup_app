@@ -1,11 +1,18 @@
 <router-outlet></router-outlet>
+<ng-container *ngIf="meetupService.loaded | async; else loading">
 <div class="container">
-<div *ngFor="let meetupRecord of myMeetupsList | async">
+
+  <div *ngFor="let meetupRecord of myMeetupsList | async">
 <app-meetup-record
   [data]="meetupRecord"></app-meetup-record>
 <!--  (editEvent)="findMeetup($event)"-->
-
 </div>
-
-<a routerLink="/my-meetups/meetup-entry" class="create-meetup-link">Создать митап</a>
+    <a routerLink="/my-meetups/meetup-entry" class="create-meetup-link">Создать митап</a>
 </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="material-spinner-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</ng-template>

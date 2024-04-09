@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {User} from "../interfaces/user";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -10,7 +10,8 @@ import {NgClass, NgIf} from "@angular/common";
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, NgIf, NgClass],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class LoginComponent {

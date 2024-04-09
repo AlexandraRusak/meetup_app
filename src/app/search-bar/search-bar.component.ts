@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {User} from "../interfaces/user";
 import {MeetupServiceService} from "../services/meetup-service.service";
@@ -10,7 +10,8 @@ import {MeetupServiceService} from "../services/meetup-service.service";
     ReactiveFormsModule
   ],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchBarComponent {
   private meetupService = inject(MeetupServiceService)

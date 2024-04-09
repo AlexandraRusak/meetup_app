@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, delay, map, Observable, tap} from "rxjs";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -15,18 +15,53 @@ import {UserIdName} from "../user-id-name";
 export class AdminService {
 
 
-  private usersData$: BehaviorSubject<InfoUserAdmin[]> = new BehaviorSubject<InfoUserAdmin[]>([])
+  public usersData$: BehaviorSubject<InfoUserAdmin[]> = new BehaviorSubject<InfoUserAdmin[]>([])
   private userToEditData$: BehaviorSubject<InfoUserAdmin[]> = new BehaviorSubject<InfoUserAdmin[]>([])
+  public loaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
+
+  totalItemsCount = 0;
+  pageSize = 10;
+  currentPageIndex = 0;
+  private startIndex: number = 0;
+  private endIndex: number = 10;
+
   constructor(private httpClient: HttpClient,
               private router: Router) { }
 
+  setPagination(pageSize:number, currentPageIndex:number) {
+    this.pageSize = pageSize
+    this.currentPageIndex = currentPageIndex
+    this.startIndex = this.currentPageIndex * this.pageSize;
+    this.endIndex = this.startIndex + this.pageSize;
+    this.fetchList()
+  }
+
   fetchList() {
+    this.loaded$.next(false)
+    // let obs =
     this.httpClient.get<InfoUserAdmin[]>(`${environment.baseUrl}/user`)
-      // .pipe(tap(receivedItems =>console.log(receivedItems)))
-      .subscribe(receivedItems => this.usersData$.next(receivedItems));
+      .pipe(
+        (delay(500)),
+        (map(users => {
+          this.totalItemsCount = users.length;
+          return users.filter(
+          (user, index) => {
+            return (index>=this.startIndex)&&(index<this.endIndex)
+          })}))
+      )
+      .subscribe({
+        next: receivedItems => {
+          return this.usersData$.next(receivedItems)},
+        complete: () => this.loaded$.next(true)
+      });
+    // return obs
   }
   get usersList(): Observable<InfoUserAdmin[]> {
     return this.usersData$.asObservable()
+  }
+
+  get loaded():BehaviorSubject<boolean>{
+    return this.loaded$
   }
 
   fetchUser(id: string) {

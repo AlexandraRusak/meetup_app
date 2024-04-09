@@ -4,9 +4,10 @@ import {LoginService} from "../services/login.service";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {map} from "rxjs";
 import {MeetupRecordComponent} from "../meetup-record/meetup-record.component";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {EditMeetupComponent} from "../edit-meetup/edit-meetup.component";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 
 @Component({
@@ -19,6 +20,8 @@ import {IMeetupRecord} from "../interfaces/imeetup-record";
     AsyncPipe,
     RouterOutlet,
     EditMeetupComponent,
+    NgIf,
+    MatProgressSpinner,
   ],
   templateUrl: './my-meetups.component.html',
   styleUrl: './my-meetups.component.scss',
@@ -33,6 +36,7 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
 
 
   ngOnInit() {
+    this.meetupService.clearFilter()
     this.refresh()
   }
 
@@ -46,7 +50,7 @@ export class MyMeetupsComponent implements OnInit, OnDestroy{
   timerId: any
 
   refresh () {
-     this.meetupService.fetchList()
+    this.meetupService.fetchList()
     // @ts-ignore
     this.timerId = setTimeout(() => {
       this.refresh();

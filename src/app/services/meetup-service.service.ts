@@ -3,9 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MeetupEntry} from "../interfaces/meetup-entry";
 import {environment} from "../../environments/environment";
-import {BehaviorSubject, map, Observable, ReplaySubject, Subscription, tap} from "rxjs";
+import {BehaviorSubject, delay, map, Observable, ReplaySubject, Subscription, tap} from "rxjs";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {AddUserToMeetup} from "../interfaces/add-user-to-meetup";
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -14,31 +15,58 @@ export class MeetupServiceService {
 
   private meetupsData$: BehaviorSubject<Array<IMeetupRecord>> = new BehaviorSubject<Array<IMeetupRecord>>([])
   private meetupToEdit$: BehaviorSubject<Array<IMeetupRecord>> = new BehaviorSubject<Array<IMeetupRecord>>([])
+  public loaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
+  private tokens: string[] = []
+
   constructor(private httpClient: HttpClient,
               private router: Router) {
   }
 
   fetchList() {
+    this.loaded$.next(false)
     this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
-      .pipe(map(value => value.filter(meetupRecord => meetupRecord.owner !== null)))
-      .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
+      .pipe((delay(500)))
+      .pipe(map(value => value.filter(meetupRecord => {
+    if (meetupRecord.owner === null) {
+      return false
+    }
+    return this.tokens.every(token => (meetupRecord.name.includes(token))
+      ||(meetupRecord.owner.fio.toLowerCase().includes(token))
+      ||(meetupRecord.description.toLowerCase().includes(token))
+      ||(formatDate(meetupRecord.time, 'dd.MM.yyyyTHH:mm', 'en').includes(token)))
+      })))
+      .subscribe({
+        next: receivedItems => this.meetupsData$.next(receivedItems),
+        complete: () => this.loaded$.next(true)
+      })
+
+  }
+
+  get loaded():BehaviorSubject<boolean>{
+    return this.loaded$
+  }
+
+  clearFilter() {
+    this.tokens = []
   }
 
   fetchFilteredList(filterStr: string) {
-    this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
-      .pipe(map(value => value.filter(meetupRecord => {
-        let tokens = filterStr.toLowerCase().split(' ')
-        if (meetupRecord.owner === null) {
-          return false
-        }
-          return tokens.every(token => (meetupRecord.name.includes(token))
-          ||(meetupRecord.owner.fio.toLowerCase().includes(token))
-          ||(meetupRecord.description.toLowerCase().includes(token))
-          ||(meetupRecord.time.toLocaleString().toLowerCase().includes(token)))
-      }
-      )))
-
-      .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
+    this.tokens = filterStr.toLowerCase().split(' ')
+    this.fetchList()
+    // this.httpClient.get<IMeetupRecord[]>(`${environment.baseUrl}/meetup`)
+    //   .pipe(map(value => value.filter(meetupRecord => {
+    //     let tokens = filterStr.toLowerCase().split(' ')
+    //     if (meetupRecord.owner === null) {
+    //       return false
+    //     }
+    //       return tokens.every(token => (meetupRecord.name.includes(token))
+    //       ||(meetupRecord.owner.fio.toLowerCase().includes(token))
+    //       ||(meetupRecord.description.toLowerCase().includes(token))
+    //       ||(meetupRecord.time.toLocaleString().toLowerCase().includes(token)))
+    //   }
+    //   )))
+    //
+    //   .subscribe(receivedItems => this.meetupsData$.next(receivedItems));
   }
 
   get meetupList(): Observable<IMeetupRecord[]> {

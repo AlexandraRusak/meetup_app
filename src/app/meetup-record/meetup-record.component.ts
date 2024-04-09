@@ -1,7 +1,16 @@
-import {ChangeDetectorRef, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import {IMeetupRecord} from "../interfaces/imeetup-record";
 import {IUser} from "../interfaces/iuser";
-import {NgIf} from "@angular/common";
+import {formatDate, NgIf} from "@angular/common";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {LoginService} from "../services/login.service";
 import {AddUserToMeetup} from "../interfaces/add-user-to-meetup";
@@ -16,7 +25,8 @@ import {RouterLink} from "@angular/router";
     RouterLink
   ],
   templateUrl: './meetup-record.component.html',
-  styleUrl: './meetup-record.component.scss'
+  styleUrl: './meetup-record.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeetupRecordComponent implements OnInit {
 
@@ -54,7 +64,8 @@ export class MeetupRecordComponent implements OnInit {
     }
 
   get startTime(): string {
-    return this._startDate.toLocaleString()
+
+    return formatDate(this._startDate, 'dd.MM.yyyy HH:mm', 'en')
   }
 
   get endTime(): string {

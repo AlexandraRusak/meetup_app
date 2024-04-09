@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {map, Subject, takeUntil} from "rxjs";
 import {AdminService} from "../services/admin.service";
 import {InfoUserAdmin} from "../interfaces/info-user-admin";
@@ -17,7 +17,8 @@ import {UserIdName} from "../user-id-name";
     NgIf
   ],
   templateUrl: './user-edit-form.component.html',
-  styleUrl: './user-edit-form.component.scss'
+  styleUrl: './user-edit-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserEditFormComponent implements OnDestroy {
 

@@ -1,6 +1,25 @@
   <div class="container">
-    <div *ngFor="let infoUserAdmin of adminService.usersList | async">
-      <app-user-info [data]="infoUserAdmin" />
-    </div>
+<!--    <div *ngIf="loading$ | async else loading">-->
+  <ng-container *ngIf="adminService.loaded | async; else loading">
+    <ng-container *ngIf="adminService.usersList | async as userList">
+    <div *ngFor="let infoUserAdmin of userList" >
+        <app-user-info [data]="infoUserAdmin" />
+      </div>
+    </ng-container>
+  </ng-container>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 1000]"
+      (page)="onPageChange($event)"
+      [length]="adminService.totalItemsCount"
+      [pageSize]="adminService.pageSize"
+      showFirstLastButtons
+      aria-label="Select page">
+    </mat-paginator>
+    <ng-template #loading>
+      <div class="material-spinner-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+
   </div>
 

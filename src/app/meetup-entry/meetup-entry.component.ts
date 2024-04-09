@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -21,7 +21,8 @@ import {NgIf} from "@angular/common";
     NgIf
   ],
   templateUrl: './meetup-entry.component.html',
-  styleUrl: './meetup-entry.component.scss'
+  styleUrl: './meetup-entry.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeetupEntryComponent {
 

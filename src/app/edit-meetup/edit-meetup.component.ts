@@ -1,13 +1,14 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy} from '@angular/core';
 import {formatDate, NgIf} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MeetupServiceService} from "../services/meetup-service.service";
 import {MeetupEntry} from "../interfaces/meetup-entry";
 import {IMeetupRecord} from "../interfaces/imeetup-record";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {MatFormField, MatHint, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {IUser} from "../interfaces/iuser";
 
 @Component({
   selector: 'app-edit-meetup',
@@ -22,18 +23,22 @@ import {MatInput} from "@angular/material/input";
     MatFormField
   ],
   templateUrl: './edit-meetup.component.html',
-  styleUrl: './edit-meetup.component.scss'
+  styleUrl: './edit-meetup.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditMeetupComponent {
+export class EditMeetupComponent implements OnDestroy {
 
+  private destroy: Subject<void> = new Subject();
   editMeetupForm: FormGroup
-
   meetupToEdit!: IMeetupRecord;
 
-  // TODO: почему консоль выводит по 5 раз полученные данные, плюс обработать ошибки
-  get dataToEdit(): IMeetupRecord {
-    this.meetupService.meetupToEdit.subscribe(values =>{
-      console.log(values)
+
+
+   get dataToEdit(): IMeetupRecord {
+    this.meetupService.meetupToEdit
+      .pipe(takeUntil(this.destroy))
+      .subscribe(values =>{
+      // console.log(values)
       this.meetupToEdit = values[0]
     })
     return this.meetupToEdit
@@ -42,32 +47,9 @@ export class EditMeetupComponent {
   constructor (private formBuilder: FormBuilder,
                public meetupService: MeetupServiceService) {
 
-    // TODO: сделать правильное отображение даты и времени в форме
 
-    // this.dataToEdit = {
-    //   createdAt: "string",
-    //   createdBy: 115,
-    //   name: "RxJS",
-    //   description: "Расскажем об основах RxJS",
-    //   time: new Date("2024-03-25T08:41:36.944Z"),
-    //   duration: 90,
-    //   location: "Переговорка 4",
-    //   target_audience: "Разработчики, аналитики",
-    //   need_to_know: "Ядренную физику",
-    //   will_happen: "Будем готовить пиццу",
-    //   reason_to_come: "Надо",
-    //   id: 90,
-    //   owner: {
-    //     id: 999,
-    //     email: "string",
-    //     fio: "string",
-    //     createdAt: "string"
-    //   },
-    //   updatedAt: "string",
-    //   users: []
-    // }
 
-    this.editMeetupForm = new FormGroup ({
+     this.editMeetupForm = new FormGroup ({
       name: new FormControl (`${this.dataToEdit.name}`, [Validators.required]),
       description: new FormControl (`${this.dataToEdit.description}`, [Validators.required]),
       time: new FormControl (formatDate(this.dataToEdit.time, 'yyyy-MM-ddTHH:mm', 'en'), [Validators.required]),
@@ -101,6 +83,11 @@ export class EditMeetupComponent {
     console.log(this.editMeetupForm.value)
     console.log(meetupEntry)
     this.meetupService.editMeetup(this.dataToEdit.id, meetupEntry)
+  }
+
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
 }

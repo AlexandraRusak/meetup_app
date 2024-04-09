@@ -11,6 +11,7 @@ import {
 import {RouterLink} from "@angular/router";
 import {LoginService} from "../services/login.service";
 import {User} from "../interfaces/user";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ import {User} from "../interfaces/user";
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        RouterLink
+        RouterLink,
+        NgIf
     ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -44,13 +46,14 @@ export class RegisterComponent {
 
   initForm() {
     this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      fio: ['']
+      fio: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
+    this.registerForm.markAllAsTouched()
     if (this.registerForm.invalid) {
       console.log("form invalid")
       console.log(this.f['email'].errors)

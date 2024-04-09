@@ -3,12 +3,24 @@
     <div class="div-form">
       <label for="email">
         <input class="unset-input input input-local" id="email" type="email" placeholder="эл.почта" formControlName="email">
+        <div class="validation-error" *ngIf="registerForm.controls['email'].invalid&& (registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
+          <span *ngIf="registerForm.controls['email'].errors?.['required']">Это поле обязательное</span>
+          <span *ngIf="registerForm.controls['email'].errors?.['email']">Неверный формат email</span>
+        </div>
       </label>
+
       <label for="password">
         <input class="unset-input input input-local" id="password" type="password" placeholder="пароль" formControlName="password">
+        <div class="validation-error" *ngIf="registerForm.controls['password'].invalid&& (registerForm.controls['password'].touched || registerForm.controls['password'].dirty)">
+          <span *ngIf="registerForm.controls['password'].errors?.['required']">Это поле обязательное</span>
+         </div>
+
       </label>
       <label for="fio">
         <input class="unset-input input input-local" id="fio" type="text" placeholder="ФИО" formControlName="fio">
+        <div class="validation-error" *ngIf="registerForm.controls['fio'].invalid&& (registerForm.controls['fio'].touched || registerForm.controls['fio'].dirty)">
+          <span *ngIf="registerForm.controls['fio'].errors?.['required']">Это поле обязательное</span>
+        </div>
       </label>
         <button class="ax-button btn register-btn" type="submit">Зарегистрироваться</button>
       </div>

@@ -9,6 +9,7 @@ import {MeetupEntryComponent} from "./meetup-entry/meetup-entry.component";
 import {AllUsersComponent} from "./all-users/all-users.component";
 import {adminGuard} from "./guards/admin.guard";
 import {EditMeetupComponent} from "./edit-meetup/edit-meetup.component";
+import {UserEditFormComponent} from "./user-edit-form/user-edit-form.component";
 
 export const routes: Routes = [
   {
@@ -23,17 +24,14 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    // pathMatch: 'full',
     component: LoginComponent,
   },
   {
     path: 'register',
-    // pathMatch: 'full',
     component: RegisterComponent,
   },
   {
     path: 'my-meetups',
-    // component: MyMeetupsComponent,
     canActivate: [authGuard],
     children: [
       {
@@ -54,7 +52,19 @@ export const routes: Routes = [
   },
   {
     path: 'all-users',
-    component: AllUsersComponent,
-    canActivate: [adminGuard]
+    canActivate: [adminGuard],
+    children: [
+      {
+       path: "",
+       component: AllUsersComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: "user-edit",
+        component: UserEditFormComponent,
+        canActivate: [adminGuard],
+      }
+
+    ]
   }
 ];

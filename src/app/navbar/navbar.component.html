@@ -8,7 +8,7 @@
       <div class="nav-end">
         <li>
           <a class="nav-link" routerLink="">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,48,48"
                  width="48px" height="48px">
               <g fill="#b85526" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
                  stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
@@ -23,7 +23,7 @@
         </li>
         <li>
           <a class="nav-link" routerLink="/login">
-            <svg width="auto" height="38px" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="auto" height="38px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M24 24.6C30.63 24.6 36 19.23 36 12.6C36 5.97001 30.63 0.600006 24 0.600006C17.37 0.600006 12 5.97001 12 12.6C12 19.23 17.37 24.6 24 24.6ZM24 30.6C15.99 30.6 0 34.62 0 42.6V48.6H48V42.6C48 34.62 32.01 30.6 24 30.6Z"
                 fill="#B85526"/>
@@ -50,8 +50,7 @@ true}" class="nav-link" >Все митапы</a>
           <a routerLink="/my-meetups" routerLinkActive="active"   class="nav-link" >Мои митапы</a>
         </li>
         <li *ngIf="loginService.adminLoggedIn">
-          <a routerLink="/all-users" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-true}" class="nav-link" >Пользователи</a>
+          <a routerLink="/all-users" routerLinkActive="active" class="nav-link" >Пользователи</a>
         </li>
       </div>
       <div class="nav-end">

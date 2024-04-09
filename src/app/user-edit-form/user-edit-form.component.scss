@@ -1,0 +1,66 @@
+section {
+  width: 800px;
+  margin-block: 10px;
+  margin-inline: auto;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: 300px 1fr;
+  //grid-template-columns: 190px 300px 100px 110px;
+  outline: 0.5px solid var(--add-text-color);
+  background-color: var(--accent-back-color);
+  padding-inline: 20px;
+}
+
+.form-line {
+  display: flex;
+  align-items: center;
+}
+
+p, label {
+  color: var(--main-text-color);
+}
+
+div,
+form,
+p,
+input,
+label {
+  background-color: var(--accent-back-color);
+}
+
+form, .roles {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+button:disabled {
+  background-color: var(--accent-back-color);
+  border: 0.5px solid var(--add-text-color);
+  color: var(--add-text-color);
+}
+
+form {
+  display: grid;
+}
+
+input {
+  width: 100%;
+}
+
+.role-u {
+  padding-top:0;
+  margin-top: 0;
+}
+
+.role-a {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+

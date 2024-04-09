@@ -61,6 +61,10 @@ h2, h3 {
   cursor: pointer;
 }
 
+svg:hover path{
+  fill: var(--accent-text-color);
+}
+
 //links
 
 .link {

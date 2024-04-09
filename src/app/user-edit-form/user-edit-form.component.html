@@ -1,0 +1,30 @@
+<section>
+
+  <div class="roles">
+    <p>User Id: {{userToEdit.id}} </p>
+    <p>Текущие роли:</p>
+    <p class="role-a"*ngIf="hasAdmin">admin</p>
+    <p class="role-u" *ngIf="hasUser">user</p>
+    <button *ngIf="!hasAdmin" data-id="{{userToEdit.id}}" class="ax-button btn" (click)="handleAddAdmin()">Добавить права admin</button>
+  </div>
+
+  <form [formGroup]="editForm" (submit)="onSubmit()">
+  <div class="form-line">
+  <label for="email">Email</label>
+  <input class="unset-input input" type="text" id="email" formControlName="email">
+  </div>
+
+  <div class="form-line">
+  <label for="fio">ФИО:</label>
+  <input class="unset-input input" type="text" id="fio" formControlName="fio">
+  </div>
+
+  <div class="form-line">
+    <label for="password">Пароль:</label>
+    <input class="unset-input input" type="text" id="password" formControlName="password">
+  </div>
+
+  <button class="ax-button btn">Редактировать</button>
+</form>
+
+</section>

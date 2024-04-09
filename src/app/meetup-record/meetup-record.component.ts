@@ -36,9 +36,7 @@ export class MeetupRecordComponent implements OnInit {
   public committed: boolean = false;
 
   ngOnInit() {
-    // console.log(this.loginService.userId)
-    // console.log(this.data.createdBy)
-    this._startDate = new Date(this.data.time)
+     this._startDate = new Date(this.data.time)
     this._endDate = new Date(this._startDate.getTime() + this.data.duration*60000)
     const now = new Date()
     // this.status = "planned"
@@ -53,8 +51,7 @@ export class MeetupRecordComponent implements OnInit {
     this.checkIfICanGo()
     this.checkIfICanEdit()
     this.checkIfICommitted()
-    // this.cdr.markForCheck();
-  }
+    }
 
   get startTime(): string {
     return this._startDate.toLocaleString()
@@ -91,7 +88,6 @@ export class MeetupRecordComponent implements OnInit {
       idUser: Number(this.loginService.userId)
     }
     this.meetupService.addUserToMeetup(obj)
-    // this.cdr.markForCheck();
   }
 
   handleIamNotGoing () {
@@ -100,11 +96,10 @@ export class MeetupRecordComponent implements OnInit {
       idUser: Number(this.loginService.userId)
     }
     this.meetupService.deleteUserfromMeetup(obj)
-    // this.cdr.markForCheck();
+
   }
 
-  // @Output()
-  // public editEvent = new EventEmitter();
+
   handleEditClick($event: any) {
     console.log($event.target.id)
     // routerLink="/my-meetups/edit-meetup"

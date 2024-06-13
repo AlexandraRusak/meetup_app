@@ -82,7 +82,7 @@ export class AdminService {
       .subscribe({
         next: value => {
           console.log(value)
-          alert("user edited")
+          // alert("user edited")
           this.fetchList()
           this.router.navigate(['all-users'])
         },
@@ -99,7 +99,7 @@ export class AdminService {
       .subscribe({
         next: value => {
           console.log(value)
-          alert("user deleted")
+          // alert("user deleted")
           this.fetchList()
         },
         error: err => {

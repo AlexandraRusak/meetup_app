@@ -78,25 +78,6 @@ h2, h3 {
 
 //buttons
 
-.ax-button {
-  all: unset;
-  outline: revert;
-  box-sizing: border-box;
-}
-
-.btn {
-  background-color: var(--accent-color-violet);
-  color: var(--main-text-color);
-  border-radius: 5px;
-  padding-inline: 15px;
-  padding-block: 10px;
-}
-
-.btn:hover,
-.btn:active {
-  background-color: var(--accent-text-color);
-  cursor: pointer;
-}
 
 svg:hover path{
   fill: var(--accent-text-color);

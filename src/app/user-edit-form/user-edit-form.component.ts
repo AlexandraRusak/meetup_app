@@ -69,9 +69,9 @@ export class UserEditFormComponent implements OnDestroy {
     }
     console.log("form valid")
     let entry: User = {
-      email: `${this.editForm.value.email}`,
-      password: `${this.editForm.value.password}`,
-      fio: `${this.editForm.value.fio}`
+      email: this.editForm.value.email,
+      password: this.editForm.value.password,
+      fio: this.editForm.value.fio
     }
     this.adminService.editUser(this.userToEdit.id, entry)
   }

@@ -35,9 +35,9 @@ export class AllMeetupsComponent implements OnInit {
 
   refresh () {
     this.meetupService.fetchList()
-    // @ts-ignore
     this.timerId = setTimeout(() => {
-      this.refresh();
+      // this.refresh();
+      this.meetupService.fetchList()
     },60000)
   }
 
